@@ -13,3 +13,9 @@ pip install -r requirements.txt
 ```sh
 python test_dati_gov.py
 ```
+
+---
+
+Special thanks to [Gabriele Guizzardi (@guizzardi)](https://github.com/guizzardi)
+that started this project during hack.developers.italia.it 
+(Contamination Lab - Univpm 2017)

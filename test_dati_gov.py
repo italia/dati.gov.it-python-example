@@ -4,27 +4,23 @@ scritto da Gabriele Guizzardi
 presso Contamination Lab - Univpm
 durante hack.developers.italia.it 
 """
-import urllib
+
+import requests
 import json
-import timeit
 
 
-def pp_json(json_thing, sort=True, indents=4):
+API_BASE = 'http://www.dati.gov.it/api/3'
+API_PACKAGE_SHOW = 'action/package_show'
 
-    if type(json_thing) is str:
-        print(json.dumps(json.loads(json_thing), sort_keys=sort, indent=indents))
+def get_resources_by_id(id):
+    url = f'{API_BASE}/{API_PACKAGE_SHOW}?id={id}'
+    r = requests.get(url)
+    if r.status_code == 200:
+        return r.json()
     else:
-        print(json.dumps(json_thing, sort_keys=sort, indent=indents))
-    return ""
+        raise Exception("Resource not found!")
 
-start = timeit.default_timer()
-url = 'http://www.dati.gov.it/api/3/action/package_show?id=personale-provinciale-rapporto-lavoro-non-tempo-indeterminato'
-result = json.load(urllib.urlopen(url))
-print pp_json(result)
 
-item_dict = json.load(urllib.urlopen(url))
-print "Numero di resources: " + str(len(item_dict['result']['resources']))
-
-stop = timeit.default_timer()
-
-print "Tempo: " + str(stop - start)
+resources = get_resources_by_id('19dfee8a-60c3-4718-ad62-199735f7a16b')
+print (json.dumps(resources, indent=4, sort_keys=True))
+print ("Numero di resources: " + str(len(resources['result']['resources'])))

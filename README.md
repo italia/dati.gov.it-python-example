@@ -1,4 +1,4 @@
-# Python example to fetch dati.gov.it API
+# dati.gov.it Python example
 
 A simple python example that fetches [dati.gov.it API](https://www.dati.gov.it/sviluppatori)
 
